@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Order Confirmation | Pure Banana India</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Confirmation</h1>
+        <p>Your order has been successfully placed!</p>
+
+        <h2>Order Details</h2>
+        <div id="orderDetails"></div>
+
+        <button onclick="window.location.href='index.html'">Go to Homepage</button>
+    </div>
+
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                quantity: params.get('quantity'),
+                country: params.get('country'),
+                state: params.get('state'),
+                city: params.get('city'),
+                doorNo: params.get('doorNo'),
+                address: params.get('address'),
+                phoneNumber: params.get('phoneNumber')
+            };
+        }
+
+        function displayOrderDetails() {
+            const orderDetails = getQueryParams();
+            const detailsDiv = document.getElementById('orderDetails');
+
+            detailsDiv.innerHTML = `
+                <p><strong>Quantity:</strong> ${orderDetails.quantity}</p>
+                <p><strong>Delivery Address:</strong> ${orderDetails.doorNo}, ${orderDetails.address}, ${orderDetails.city}, ${orderDetails.state}, ${orderDetails.country}</p>
+                <p><strong>Phone Number:</strong> ${orderDetails.phoneNumber}</p>
+            `;
+        }
+
+        window.onload = displayOrderDetails;
+    </script>
+</body>
+</html>
